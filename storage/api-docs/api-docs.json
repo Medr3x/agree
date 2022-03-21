@@ -1,0 +1,717 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RESTful API - Yu-Gi-Oh!",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://agree.test:8080"
+        }
+    ],
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "description": "Returns barear token",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "description": "Close the session",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "description": "Registro de usuario, se puede elegir 3 roles:\r\n *      admin, player y card_makers",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "rol": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/cards": {
+            "get": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Lista Cartas",
+                "description": "",
+                "operationId": "b2c5ca153f9545b46009f2b30b2b50c9",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Crear Carta",
+                "description": "",
+                "operationId": "72c36cdb5b3581579980329361cfeffe",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre",
+                                        "type": "string"
+                                    },
+                                    "sku_id": {
+                                        "description": "Identificador",
+                                        "type": "string",
+                                        "example": "SA0-S002"
+                                    },
+                                    "first_edition": {
+                                        "description": "Permite 0 o 1",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "serial_code": {
+                                        "description": "Codigo de Serie",
+                                        "type": "integer",
+                                        "example": "121231212"
+                                    },
+                                    "category_code": {
+                                        "description": "Debe existir el codigo de cateoria",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "description": "Precio",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "card_creation_date": {
+                                        "description": "Fecha de creacion",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2020-01-27"
+                                    },
+                                    "atk": {
+                                        "description": "Ataque",
+                                        "type": "integer"
+                                    },
+                                    "def": {
+                                        "description": "Defensa",
+                                        "type": "integer"
+                                    },
+                                    "qty_star": {
+                                        "description": "Estrellas",
+                                        "type": "integer"
+                                    },
+                                    "image": {
+                                        "description": "Base64",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/cards/{id}": {
+            "get": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Mostrar Carta",
+                "description": "",
+                "operationId": "cea4bf4e930fa0a1385c2a84977b25a5",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Actualizar Cartas",
+                "description": "",
+                "operationId": "1f2ebac845fed1ce1d6adbfdf23cb9fc",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre",
+                                        "type": "string"
+                                    },
+                                    "sku_id": {
+                                        "description": "Identificador",
+                                        "type": "string",
+                                        "example": "SA0-S002"
+                                    },
+                                    "first_edition": {
+                                        "description": "Permite 0 o 1",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "serial_code": {
+                                        "description": "Codigo de Serie",
+                                        "type": "integer",
+                                        "example": "121231212"
+                                    },
+                                    "category_code": {
+                                        "description": "Debe existir el codigo de cateoria",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "description": "Precio",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "card_creation_date": {
+                                        "description": "Fecha de creacion",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2020-01-27"
+                                    },
+                                    "atk": {
+                                        "description": "Ataque",
+                                        "type": "integer"
+                                    },
+                                    "def": {
+                                        "description": "Defensa",
+                                        "type": "integer"
+                                    },
+                                    "qty_star": {
+                                        "description": "Estrellas",
+                                        "type": "integer"
+                                    },
+                                    "image": {
+                                        "description": "Base64",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Eliminar Cartas",
+                "description": "",
+                "operationId": "414631ef3585e49ac90dd6bc266d526a",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/cards/assign": {
+            "post": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Asignar Carta",
+                "description": "",
+                "operationId": "0975e9669a09a0d1363ceb89b668b140",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "card": {
+                                        "description": "Id de Carta",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/cards/return-card": {
+            "post": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Retornar Carta",
+                "description": "",
+                "operationId": "fc08301ce0e153508480705bf9b0339c",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "card": {
+                                        "description": "Id de Carta",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/cards/return-all-cards": {
+            "post": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Retornar Carta",
+                "description": "",
+                "operationId": "8010d0146ec56411041da13395c327ca",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cards": {
+                                        "description": "Array de IDs",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Lista Categorias y SubCategorias",
+                "description": "",
+                "operationId": "887f1ab441defeefa3a9afb3d8bae769",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Crear Categorias y SubCategorias",
+                "description": "El parametro parent_code es opcional, si se desea crear una categoria padre no se envia en el body.",
+                "operationId": "528e99ff0e3d24de9a9870ab99619039",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "sku_id": {
+                                        "type": "string"
+                                    },
+                                    "parent_code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Mostrar Categoria y SubCategoria",
+                "description": "",
+                "operationId": "a604c1a3cf1dcb0fc186ff5d0a30779b",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Actualizar Categorias y SubCategorias",
+                "description": "",
+                "operationId": "fa1a3d6ff8756f8f955dac873b8c9d13",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "sku_id": {
+                                        "type": "string"
+                                    },
+                                    "parent_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Eliminar Categorias y SubCategorias",
+                "description": "",
+                "operationId": "f2c692a4f491c2cc38650f93ee76aa60",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token obtenido al iniciar sesion",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Estos endpoints manejan la autenticacion de los usuarios, su registro y cierre de sesion."
+        },
+        {
+            "name": "Cards",
+            "description": "Estos endpoints manejan el ABM de las cartas."
+        },
+        {
+            "name": "Categories",
+            "description": "Estos endpoints manejan el ABM de las categorias/tipos de las cartas."
+        }
+    ],
+    "security": [
+        []
+    ]
+}
