@@ -33,3 +33,8 @@ Route::get('/download/{folder}/{file}', [
     'as' => 'image.downloadFile', 
     'uses' => [ImagesController::class, 'DownloadUploadFile']
 ]);
+
+
+
+
+

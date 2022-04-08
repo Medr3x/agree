@@ -13,6 +13,8 @@ class Card extends Model
 
     public $timestamps = true;
 
+    protected $table = 'cards';
+
     protected $fillable = [
         'name',
         'sku_id',
@@ -32,7 +34,7 @@ class Card extends Model
     
     public $file_folder = 'card';
 
-    public function subcategor()
+    public function subcategory()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -49,5 +51,22 @@ class Card extends Model
     public function getUrlImage()
     {
         return env('APP_URL').'//img//'.$this->image;
+    }
+
+    public function scopeFilters($query, $filters = [])
+    {
+        $column_exist = null;
+        foreach($filters AS $key => $value){
+            if(env('DB_CONNECTION') == 'mysql'){
+                $column_exist = \DB::select("SHOW COLUMNS FROM `".$this->table."` LIKE '".$key."'");
+            }elseif(env('DB_CONNECTION') == 'sqlite'){
+                $column_exist = \DB::select("SELECT 1 FROM PRAGMA_TABLE_INFO('".$this->table."') WHERE name = '".$key."'");
+            }
+            
+            if(count($column_exist)>0){
+                $query = $query->where($key,'=',$value);
+            }
+        }
+        return $query;
     }
 }

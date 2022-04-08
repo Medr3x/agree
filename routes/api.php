@@ -25,7 +25,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     });
 });
 
-Route::group(['middleware' => ['auth:api']], function () {
+Route::group(['middleware' => ['auth:api', 'api']], function () {
     Route::resource('categories', CategoriesController::class)->except([ 
                                                         'edit', 
                                                         'create'

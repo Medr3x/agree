@@ -46,7 +46,8 @@ class CardsController extends Controller
     */
     public function index(CardRequest $request)
     {
-        $cards = Card::paginate(1);
+        $filters = (isset($request->filters) && is_array($request->filters)) ? $request->filters : [];
+        $cards = Card::filters($filters)->paginate(1);
         return apiResponse($cards, "Cartas listadas correctamente", 'Listado!',200);
     }
 
